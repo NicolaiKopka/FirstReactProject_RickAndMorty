@@ -1,3 +1,29 @@
-.search {
-    padding: 2rem;
+button {
+    background-color: #FFE69A;
+    font-size: 1.4rem;
+    padding: 0.4rem 1rem;
+    margin: 2rem;
+    text-decoration: none;
+    border-radius: 1rem;
 }
+
+.search {
+    padding-bottom: 3rem;
+    padding-top: 2rem;
+
+}
+
+.label {
+    padding-right: 1.4rem;
+}
+
+.search-items {
+    padding-bottom: 1.1rem;
+    font-size: 1.3rem;
+}
+
+.action-field {
+    font-size: 1.2rem;
+    border-radius: 0.4rem;
+}
+

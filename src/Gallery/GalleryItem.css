@@ -1,0 +1,19 @@
+
+h3 {
+    font-size: 1.5rem;
+}
+.gallery-item {
+    padding-bottom: 5rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+.char-detail {
+    font-size: 1.2rem;
+    margin-bottom: 0.7rem;
+}
+
+.bold {
+    font-weight: bold;
+    font-size: 1.1rem;
+}

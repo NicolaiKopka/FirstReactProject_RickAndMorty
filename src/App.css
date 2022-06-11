@@ -4,6 +4,7 @@
 
 body {
   background-color: #FFDAAF;
+  font-family: "Ubuntu", sans-serif;
 }
 
 img {
@@ -17,8 +18,3 @@ img {
   justify-content: space-between;
 }
 
-.gallery-item {
-  padding-bottom: 5rem;
-  padding-right: 2rem;
-  padding-left: 2rem;
-}
