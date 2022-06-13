@@ -36,11 +36,7 @@ export default function Gallery() {
 
     function requestCharacters(url: string) {
         axios.get(url)
-            .then(response => {
-                if(response.status === 200) {
-                    return response.data;
-                }
-            })
+            .then(response => response.data)
             .then((characters: AllCharacters) => {
                 setFetch(characters.results);
                 setInfo(characters.info);
