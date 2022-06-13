@@ -2,6 +2,7 @@ import GalleryItem from "./GalleryItem";
 import {useEffect, useState} from "react";
 import {AllCharacters, Character, Info} from "../model";
 import "./Gallery.css";
+import axios from "axios";
 
 
 export default function Gallery() {
@@ -10,16 +11,41 @@ export default function Gallery() {
     const [searchState, setSearchState] = useState("");
     const [allCharacters, setFetch] = useState<Array<Character>>([])
     const [info, setInfo] = useState<Info>()
+    const [error, setError] = useState("");
 
     useEffect(() => requestCharacters("https://rickandmortyapi.com/api/character"), []);
 
+    useEffect(() => {
+        setTimeout(() => setError(""), 3000)
+    }, [error])
+
+    // function requestCharacters(url: string) {
+    //     fetch(url)
+    //         .then(response => {
+    //             if(response.status === 200) {
+    //                 return response.json();
+    //             }
+    //             throw new Error();
+    //         })
+    //         .then((characters: AllCharacters) => {
+    //             setFetch(characters.results);
+    //             setInfo(characters.info);
+    //         })
+    //         .catch(e => setError("Ahhhh, nix gut"))
+    // }
+
     function requestCharacters(url: string) {
-        fetch(url)
-            .then(response => response.json())
+        axios.get(url)
+            .then(response => {
+                if(response.status === 200) {
+                    return response.data;
+                }
+            })
             .then((characters: AllCharacters) => {
                 setFetch(characters.results);
                 setInfo(characters.info);
             })
+            .catch(e => setError("Ahhhh, nix gut"))
     }
 
     const nextPage = () => {
@@ -36,6 +62,9 @@ export default function Gallery() {
 
     return (
         <div className="gallery-wrapper">
+            {error &&
+                <div className={"gallery-error"}>{error}</div>
+            }
             <div className={"search"}>
                 <div className={"search-items"}>
                     <label className={"label"} htmlFor={"search-bar"}>Search for Character: </label>
