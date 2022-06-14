@@ -54,7 +54,7 @@ export default function Gallery() {
 
 
     const characters = allCharacters.filter(c => c.name.toLowerCase().includes(name.toLowerCase()) && (c.status.toLowerCase().includes(searchState.toLowerCase())))
-        .map(c => <GalleryItem character={{name: c.name, image: c.image, species: c.species, status: c.status}}/>);
+        .map(c => <GalleryItem key={c.id} character={c}/>);
 
     return (
         <div className="gallery-wrapper">
