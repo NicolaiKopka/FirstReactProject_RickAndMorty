@@ -7,8 +7,8 @@ interface GalleryItemProps {
 
 export default function GalleryItem(props: GalleryItemProps) {
     return (
-        <div className="gallery-item">
-            <img src={props.character.image}/>
+        <div className="gallery-item" data-testid={props.character.id}>
+            <img data-testId="image" src={props.character.image}/>
             <div className="item-text">
                 <h3 data-testId="name-headline">{props.character.name}</h3>
                 <div data-testId="status-div" className={"char-detail"}>

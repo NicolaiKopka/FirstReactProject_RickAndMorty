@@ -36,7 +36,12 @@ export default function Gallery() {
 
     function requestCharacters(url: string) {
         axios.get(url)
-            .then(response => response.data)
+            .then(response => {
+                if(response.status === 200) {
+                    return response.data
+                }
+                throw new Error("doof")
+            })
             .then((characters: AllCharacters) => {
                 setFetch(characters.results);
                 setInfo(characters.info);
@@ -54,7 +59,7 @@ export default function Gallery() {
 
 
     const characters = allCharacters.filter(c => c.name.toLowerCase().includes(name.toLowerCase()) && (c.status.toLowerCase().includes(searchState.toLowerCase())))
-        .map(c => <GalleryItem key={c.id} character={c}/>);
+        .map((c, index) => <GalleryItem key={c.id} character={c}/>);
 
     return (
         <div className="gallery-wrapper">
@@ -64,7 +69,7 @@ export default function Gallery() {
             <div className={"search"}>
                 <div className={"search-items"}>
                     <label className={"label"} htmlFor={"search-bar"}>Search for Character: </label>
-                    <input className={"action-field"} name={"search-bar"} type={"text"} value={name} onChange={ev => setName(ev.target.value)}></input>
+                    <input data-testid="gallery-input" className={"action-field"} name={"search-bar"} type={"text"} value={name} onChange={ev => setName(ev.target.value)}></input>
                 </div>
                 <div className={"search-items"}>
                     <label className={"label"} htmlFor={"status"}>Status:</label>
@@ -78,7 +83,7 @@ export default function Gallery() {
 
             </div>
 
-            <div className={"gallery"}>
+            <div data-testid="gallery-test" className={"gallery"}>
                 {characters}
             </div>
             {info?.prev && <button onClick={prevPage}>Prev</button>}
