@@ -7,16 +7,19 @@ import axios from "axios";
 export default function CharacterDetailPage() {
 
     const [character, setCharacter] = useState<DetailCharacter>()
+    const [errorMessage, setErrorMessage] = useState("")
     const id = useParams().id
 
     useEffect(() => {
         axios.get(`https://rickandmortyapi.com/api/character/${id}`)
             .then(response => response.data)
             .then(c => setCharacter(c))
+            .catch(e => setErrorMessage("Character not found"))
     }, [id])
 
     return (
         <div>
+            {errorMessage && <div className={"error-message"}>{errorMessage}</div>}
             <img alt={""} className={"detail-img"} src={character?.image}/>
             <div>
                 <h3 data-testId="name-headline">{character?.name}</h3>

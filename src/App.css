@@ -24,3 +24,9 @@ img {
   justify-content: space-between;
 }
 
+.error-message {
+  margin-top: 3rem;
+  color: red;
+  font-size: 3rem;
+}
+
