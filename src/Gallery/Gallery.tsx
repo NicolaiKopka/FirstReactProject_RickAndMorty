@@ -12,8 +12,10 @@ export default function Gallery() {
     const [allCharacters, setFetch] = useState<Array<Character>>([])
     const [info, setInfo] = useState<Info>()
     const [error, setError] = useState("");
+    //const [url, setUrl] = useState(localStorage.getItem("pageURL") ?? "https://rickandmortyapi.com/api/character")
+    const url = localStorage.getItem("pageURL") ?? "https://rickandmortyapi.com/api/character";
 
-    useEffect(() => requestCharacters("https://rickandmortyapi.com/api/character"), []);
+    useEffect(() => requestCharacters(url), [url]);
 
     useEffect(() => {
         setTimeout(() => setError(""), 3000)
@@ -43,6 +45,7 @@ export default function Gallery() {
                 throw new Error("doof")
             })
             .then((characters: AllCharacters) => {
+                localStorage.setItem("pageURL", url)
                 setFetch(characters.results);
                 setInfo(characters.info);
             })
