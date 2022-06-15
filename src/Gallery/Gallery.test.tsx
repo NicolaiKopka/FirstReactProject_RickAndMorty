@@ -2,6 +2,7 @@ import axios from "axios";
 import {Character} from "../model";
 import Gallery from "./Gallery";
 import {render, waitFor, screen, fireEvent} from "@testing-library/react";
+import {MemoryRouter} from "react-router-dom";
 
 
 
@@ -40,7 +41,7 @@ test("That get request returns correct items", async() => {
         }})
     })
 
-    render(<Gallery/>)
+    render(<MemoryRouter><Gallery/></MemoryRouter>)
 
     await waitFor(() => {
         expect(() => screen.getByTestId(12)).not.toThrowError()
