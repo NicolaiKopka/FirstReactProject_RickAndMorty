@@ -1,4 +1,4 @@
-import {NavLink, useParams} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {Character, DetailCharacter} from "../model";
 import axios from "axios";
@@ -9,6 +9,7 @@ export default function CharacterDetailPage() {
     const [character, setCharacter] = useState<DetailCharacter>()
     const [errorMessage, setErrorMessage] = useState("")
     const id = useParams().id
+    const nav = useNavigate();
 
     useEffect(() => {
         axios.get(`https://rickandmortyapi.com/api/character/${id}`)
@@ -16,6 +17,11 @@ export default function CharacterDetailPage() {
             .then(c => setCharacter(c))
             .catch(e => setErrorMessage("Character not found"))
     }, [id])
+
+    const moveBack = () => {
+        localStorage.clear();
+        nav("/");
+    }
 
     return (
         <div>
@@ -36,9 +42,7 @@ export default function CharacterDetailPage() {
                     <span className={"bold"}>Origin:</span> {character?.origin.name}
                 </div>
             </div>
-            <NavLink to={"/"}>
-                <button>Main Page</button>
-            </NavLink>
+                <button onClick={moveBack}>Main Page</button>
         </div>
     )
 }

@@ -7,7 +7,7 @@ import axios from "axios";
 
 export default function Gallery() {
 
-    const [name, setName] = useState("");
+    const [name, setName] = useState(localStorage.getItem("search") ?? "");
     const [searchState, setSearchState] = useState("");
     const [allCharacters, setFetch] = useState<Array<Character>>([])
     const [info, setInfo] = useState<Info>()
@@ -76,7 +76,12 @@ export default function Gallery() {
             <div className={"search"}>
                 <div className={"search-items"}>
                     <label className={"label"} htmlFor={"search-bar"}>Search for Character: </label>
-                    <input maxLength={10} data-testid="gallery-input" className={"action-field"} name={"search-bar"} type={"text"} value={name} onChange={ev => setName(ev.target.value)}></input>
+                    <input maxLength={10} data-testid="gallery-input" className={"action-field"}
+                           name={"search-bar"} type={"text"}
+                           value={name} onChange={ev => {
+                               localStorage.setItem("search", ev.target.value)
+                               setName(ev.target.value)
+                    }}></input>
                 </div>
                 <div className={"search-items"}>
                     <label className={"label"} htmlFor={"status"}>Status:</label>
@@ -87,9 +92,7 @@ export default function Gallery() {
                         <option value={"Unknown"}>Unknown</option>
                     </select>
                 </div>
-
             </div>
-
             <div data-testid="gallery-test" className={"gallery"}>
                 {characters}
             </div>
