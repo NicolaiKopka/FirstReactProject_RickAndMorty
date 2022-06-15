@@ -12,10 +12,13 @@ export default function Gallery() {
     const [allCharacters, setFetch] = useState<Array<Character>>([])
     const [info, setInfo] = useState<Info>()
     const [error, setError] = useState("");
-    //const [url, setUrl] = useState(localStorage.getItem("pageURL") ?? "https://rickandmortyapi.com/api/character")
-    const url = localStorage.getItem("pageURL") ?? "https://rickandmortyapi.com/api/character";
+    const [page, setPage] = useState(localStorage.getItem("page") ?? "1")
 
-    useEffect(() => requestCharacters(url), [url]);
+    useEffect(() => {
+        localStorage.setItem("page", page)
+    }, [page])
+
+    useEffect(() => requestCharacters(), []);
 
     useEffect(() => {
         setTimeout(() => setError(""), 3000)
@@ -36,7 +39,7 @@ export default function Gallery() {
     //         .catch(e => setError("Ahhhh, nix gut"))
     // }
 
-    function requestCharacters(url: string) {
+    function requestCharacters(url: string = `https://rickandmortyapi.com/api/character/?page=${page}`) {
         axios.get(url)
             .then(response => {
                 if(response.status === 200) {
@@ -45,7 +48,6 @@ export default function Gallery() {
                 throw new Error("doof")
             })
             .then((characters: AllCharacters) => {
-                localStorage.setItem("pageURL", url)
                 setFetch(characters.results);
                 setInfo(characters.info);
             })
@@ -53,10 +55,12 @@ export default function Gallery() {
     }
 
     const nextPage = () => {
+        setPage(oldPage => `${parseInt(oldPage) + 1}`)
         requestCharacters(info!.next);
     }
 
     const prevPage = () => {
+        setPage(oldPage => `${parseInt(oldPage) - 1}`)
         requestCharacters(info!.prev);
     }
 
