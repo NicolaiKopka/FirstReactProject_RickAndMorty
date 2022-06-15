@@ -1,7 +1,7 @@
 
 
 export interface Character {
-    id: string;
+    id: number;
     name: string;
     image: string;
     status: string;
@@ -16,4 +16,18 @@ export interface AllCharacters {
 export interface Info {
     next: string;
     prev: string;
+}
+
+interface Origin {
+    name: string;
+}
+
+export interface DetailCharacter {
+    id: number;
+    name: string;
+    image: string;
+    status: string;
+    species: string;
+    gender: string;
+    origin: Origin;
 }

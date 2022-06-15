@@ -69,7 +69,7 @@ export default function Gallery() {
             <div className={"search"}>
                 <div className={"search-items"}>
                     <label className={"label"} htmlFor={"search-bar"}>Search for Character: </label>
-                    <input data-testid="gallery-input" className={"action-field"} name={"search-bar"} type={"text"} value={name} onChange={ev => setName(ev.target.value)}></input>
+                    <input maxLength={10} data-testid="gallery-input" className={"action-field"} name={"search-bar"} type={"text"} value={name} onChange={ev => setName(ev.target.value)}></input>
                 </div>
                 <div className={"search-items"}>
                     <label className={"label"} htmlFor={"status"}>Status:</label>

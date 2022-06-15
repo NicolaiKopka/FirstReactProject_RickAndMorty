@@ -12,6 +12,12 @@ img {
   width: 175px;
 }
 
+.detail-img {
+  margin-top: 4rem;
+  border-radius: 12px;
+  width: 300px;
+}
+
 .gallery {
   display: flex;
   flex-flow: row wrap;
